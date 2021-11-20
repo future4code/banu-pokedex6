@@ -9,8 +9,7 @@ export const Home = () => {
         <div> 
             <h1>Home</h1>
 
-            {/*Botões para teste*/}
-            <Button variant="contained" color="primary" onClick={() => navigate("/pokedex")}>
+            <Button variant="contained" color="secondary" onClick={() => navigate("/pokedex")}>
                 Pokedex
             </Button>
             <Button variant="contained" color="secondary" onClick={() => navigate("/details")}>

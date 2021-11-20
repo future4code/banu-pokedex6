@@ -1,16 +1,16 @@
 import { Router } from './router/Router';
 
-// import { ThemeProvider } from '@mui/material/styles';
-// import { theme } from './theme/theme';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { theme } from './theme';
 
 function App() {
   return (
-    // <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <div className="App">
           <Router />
       </div>
-    // </ThemeProvider>
-  );
+    </ThemeProvider>
+  )
 }
 
 export default App;
