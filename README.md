@@ -14,3 +14,6 @@ O que funciona:
 O que não funciona: 
 - Item 3
 - Item 4
+
+Kaban:
+- https://trello.com/b/0XcvdNCy/pokedex
