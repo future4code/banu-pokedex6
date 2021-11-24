@@ -6,27 +6,22 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
 
-
-
-
 export const Home = () => {
 
     const navigate = useNavigate()
 
-    const { states, setters, requests } = useContext(GlobalStateContext)
-
-
+    const { states, requests, addPokedex } = useContext(GlobalStateContext)
 
     useEffect(() => {
         requests.getPokemons()
-    }, [requests])
+    }, [])
 
     const PokemonCard = () => {
         const mapMatches = states.pokemons.map((pokemon) => {
-            return <Card variant="outlined" maxWidth="20vw">
+            return <Card variant="outlined" key={pokemon.name}>
                     <CardMedia component="div" height="200vh">{pokemon.name}</CardMedia>
                     <CardActions>
-                        <Button variant="contained" color="secondary" >
+                        <Button variant="contained" color="secondary" onClick={() => addPokedex(pokemon)}>
                             Adicionar
                         </Button>
                         <Button variant="contained" color="secondary" >
@@ -42,7 +37,7 @@ export const Home = () => {
         <Container maxWidth="100vw"> 
             <header>
                <h1>Home</h1> 
-                <Button variant="contained" color="secondary" onClick={() => navigate("/pokedex")}>
+                <Button variant="contained" color="primary" onClick={() => navigate("/pokedex")}>
                    Ver minha Pokedex
                 </Button>
             </header>
