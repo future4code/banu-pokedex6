@@ -7,11 +7,21 @@ import axios from "axios";
 const GlobalState = (props) => {
 
     const [pokemons, setPokemons] = useState([])
-    const [pokedex, setPokedex] = useState([])
-
+    const [pokedex, setPokedex] = useState([]) 
+    const [pokemonDetails, setPokemonDetails] = useState([])
+  
+ 
     const getPokemons = () => {
         axios.get(BASE_URL)
         .then((response) => setPokemons(response.data.results))
+        .catch((error) => console.log(error.message))
+    }
+
+    const getPokemonDetails = (name) => {
+        axios.get(`${BASE_URL}/${name}`)
+        .then((response) => {
+            setPokemonDetails(response.data)
+        })
         .catch((error) => console.log(error.message))
     }
 
@@ -29,8 +39,8 @@ const GlobalState = (props) => {
     const changePokedex = (newPokemon) => {
         let newPokedex = [...pokedex, newPokemon]
         setPokedex(newPokedex)
-        removePokemonList(newPokemon)
-    }
+        removePokemonList(newPokemon) 
+    } 
 
     const removePokemonList = (retirarPokemon) => {
         let novaLista = []
@@ -38,8 +48,8 @@ const GlobalState = (props) => {
             if(pokemons[i] !== retirarPokemon) novaLista.push(pokemons[i])            
         }
         setPokemons(novaLista)
-    }
-
+    
+    } 
     const removePokemonPokedex = (poke) => {
         let removePoke = []
         for (let i = 0; i < pokedex.length; i++) {
@@ -48,9 +58,9 @@ const GlobalState = (props) => {
         setPokedex(removePoke)
     }
 
-    const states = { pokemons }
-    const setters = { setPokemons }
-    const requests = { getPokemons }
+    const states = { pokemons, pokemonDetails }
+    const setters = { setPokemons, setPokemonDetails }
+    const requests = { getPokemons,  getPokemonDetails }
 
     return (
         <GlobalStateContext.Provider value={{ states, setters, requests, pokedex, addPokedex, removePokemonPokedex }} >

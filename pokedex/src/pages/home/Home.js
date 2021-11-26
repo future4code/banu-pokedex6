@@ -1,37 +1,56 @@
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import { Card, CardActions, CardMedia } from "@material-ui/core";
-import { useEffect } from "react";
+import { useEffect} from "react";
 import { useContext } from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
+import { PokeCard, PokeCardButtonsContainer } from "./styled";
+
+
+
+
+
+
 
 export const Home = () => {
 
     const navigate = useNavigate()
 
-    const { states, requests, addPokedex } = useContext(GlobalStateContext)
+
+    const { states, requests, addPokedex, pokedex,  } = useContext(GlobalStateContext)
+
 
     useEffect(() => {
         requests.getPokemons()
-    }, [])
+
+    }, [pokedex])
+   
+    const getImage = (url) => {
+        
+    }
+
+
 
     const PokemonCard = () => {
-        const mapMatches = states.pokemons.map((pokemon) => {
-            return <Card variant="outlined" key={pokemon.name}>
-                    <CardMedia component="div" height="200vh">{pokemon.name}</CardMedia>
-                    <CardActions>
+        const mapPokemons = states.pokemons && states.pokemons.map((pokemon) => {
+
+
+            return <PokeCard  key={pokemon.name}>
+                    <p>{pokemon.name}</p>
+                    {getImage(pokemon.url)}
+                    <PokeCardButtonsContainer>
                         <Button variant="contained" color="secondary" onClick={() => addPokedex(pokemon)}>
                             Adicionar
                         </Button>
-                        <Button variant="contained" color="secondary" >
+                        <Button variant="contained" color="secondary" onClick={() => navigate(`/details/${pokemon.name}`)}>
                             Ver Detalhes
                         </Button>
-                </CardActions>
-            </Card>
+                </PokeCardButtonsContainer>
+            </PokeCard>
         })
-        return mapMatches
+        return mapPokemons
     }
+
 
     return(
         <Container maxWidth="100vw"> 
@@ -43,13 +62,9 @@ export const Home = () => {
             </header>
 
             <PokemonCard />
-
             
             <Button variant="contained" color="secondary" onClick={() => navigate("/pokedex")}>
                 Pokedex
-            </Button>
-            <Button variant="contained" color="secondary" onClick={() => navigate("/details")}>
-                Detalhes
             </Button>
 
         </Container>
