@@ -1,10 +1,9 @@
-import { useNavigate, useParams } from "react-router"
+import { useNavigate } from "react-router"
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import { useEffect} from "react";
-import { useContext } from "react";
+import { useEffect, useContext} from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { PokeCard, PokeCardButtonsContainer } from "./styled";
+import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, PokeCardsContainer } from "./styled";
+
 
 
 
@@ -15,6 +14,7 @@ import { PokeCard, PokeCardButtonsContainer } from "./styled";
 export const Home = () => {
 
     const navigate = useNavigate()
+ 
 
 
     const { states, requests, addPokedex, pokedex,  } = useContext(GlobalStateContext)
@@ -24,10 +24,6 @@ export const Home = () => {
         requests.getPokemons()
 
     }, [pokedex])
-   
-    const getImage = (url) => {
-        
-    }
 
 
 
@@ -37,7 +33,7 @@ export const Home = () => {
 
             return <PokeCard  key={pokemon.name}>
                     <p>{pokemon.name}</p>
-                    {getImage(pokemon.url)}
+                    
                     <PokeCardButtonsContainer>
                         <Button variant="contained" color="secondary" onClick={() => addPokedex(pokemon)}>
                             Adicionar
@@ -53,21 +49,18 @@ export const Home = () => {
 
 
     return(
-        <Container maxWidth="100vw"> 
-            <header>
+        <GenericContainer> 
+            <Header>
                <h1>Home</h1> 
                 <Button variant="contained" color="primary" onClick={() => navigate("/pokedex")}>
                    Ver minha Pokedex
                 </Button>
-            </header>
+            </Header>
+            <PokeCardsContainer> 
+                <PokemonCard />
+            </PokeCardsContainer>
 
-            <PokemonCard />
-            
-            <Button variant="contained" color="secondary" onClick={() => navigate("/pokedex")}>
-                Pokedex
-            </Button>
-
-        </Container>
+        </GenericContainer>
         
     )
 }

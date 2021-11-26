@@ -9,6 +9,7 @@ const GlobalState = (props) => {
     const [pokemons, setPokemons] = useState([])
     const [pokedex, setPokedex] = useState([]) 
     const [pokemonDetails, setPokemonDetails] = useState([])
+
   
  
     const getPokemons = () => {
@@ -24,6 +25,7 @@ const GlobalState = (props) => {
         })
         .catch((error) => console.log(error.message))
     }
+
 
     const addPokedex = (newPokemon) => {
         let alerta = false
@@ -58,9 +60,9 @@ const GlobalState = (props) => {
         setPokedex(removePoke)
     }
 
-    const states = { pokemons, pokemonDetails }
-    const setters = { setPokemons, setPokemonDetails }
-    const requests = { getPokemons,  getPokemonDetails }
+    const states = { pokemons, pokemonDetails,  }
+    const setters = { setPokemons, setPokemonDetails,  }
+    const requests = { getPokemons,  getPokemonDetails,  }
 
     return (
         <GlobalStateContext.Provider value={{ states, setters, requests, pokedex, addPokedex, removePokemonPokedex }} >
