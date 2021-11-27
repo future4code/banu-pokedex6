@@ -3,10 +3,7 @@ import Button from '@material-ui/core/Button';
 import { useEffect, useContext} from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
 import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, PokeCardsContainer } from "./styled";
-
-
-
-
+import axios from "axios";
 
 
 
@@ -22,17 +19,19 @@ export const Home = () => {
 
     useEffect(() => {
         requests.getPokemons()
+        requests.getImages()
+        PokemonCard()
 
     }, [pokedex])
 
 
 
     const PokemonCard = () => {
-        const mapPokemons = states.pokemons && states.pokemons.map((pokemon) => {
-
-
-            return <PokeCard  key={pokemon.name}>
+        const mapPokemons = states.pokeImage && states.pokeImage.map((pokemon) => {
+           return <PokeCard  key={pokemon.name}>
                     <p>{pokemon.name}</p>
+                    <img src={pokemon.img} />
+                    
                     
                     <PokeCardButtonsContainer>
                         <Button variant="contained" color="secondary" onClick={() => addPokedex(pokemon)}>

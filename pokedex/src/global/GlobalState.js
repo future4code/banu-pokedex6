@@ -9,13 +9,26 @@ const GlobalState = (props) => {
     const [pokemons, setPokemons] = useState([])
     const [pokedex, setPokedex] = useState([]) 
     const [pokemonDetails, setPokemonDetails] = useState([])
+    const [pokeImage, setPokeImage] = useState([])
 
   
  
     const getPokemons = () => {
         axios.get(BASE_URL)
-        .then((response) => setPokemons(response.data.results))
+        .then((response) => {setPokemons(response.data.results)})
         .catch((error) => console.log(error.message))
+    }
+
+    const getImages = () => {
+        let pokeArray = []
+        pokemons.map((poke) => {
+            axios.get(poke.url)
+            .then((response) => {pokeArray = [...pokeArray, {name: poke.name,  img: response.data.sprites.front_default}]
+            setPokeImage(pokeArray)
+            })
+        })
+
+
     }
 
     const getPokemonDetails = (name) => {
@@ -60,9 +73,9 @@ const GlobalState = (props) => {
         setPokedex(removePoke)
     }
 
-    const states = { pokemons, pokemonDetails,  }
-    const setters = { setPokemons, setPokemonDetails,  }
-    const requests = { getPokemons,  getPokemonDetails,  }
+    const states = { pokemons, pokemonDetails, pokeImage }
+    const setters = { setPokemons, setPokemonDetails, setPokeImage }
+    const requests = { getPokemons,  getPokemonDetails, getImages }
 
     return (
         <GlobalStateContext.Provider value={{ states, setters, requests, pokedex, addPokedex, removePokemonPokedex }} >

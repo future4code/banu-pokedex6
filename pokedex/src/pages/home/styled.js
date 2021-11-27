@@ -6,13 +6,17 @@ export const PokeCard = styled.div`
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 3%;
+    padding-bottom: 2%;
 `
 
 export const PokeCardButtonsContainer = styled.div` 
     width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
 
     
 
