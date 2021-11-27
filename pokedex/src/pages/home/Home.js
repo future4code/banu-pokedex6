@@ -2,8 +2,7 @@ import { useNavigate } from "react-router"
 import Button from '@material-ui/core/Button';
 import { useEffect, useContext} from "react";
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, PokeCardsContainer } from "./styled";
-import axios from "axios";
+import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, PokeCardsContainer, Image } from "./styled";
 
 
 
@@ -11,28 +10,20 @@ import axios from "axios";
 export const Home = () => {
 
     const navigate = useNavigate()
- 
 
 
-    const { states, requests, addPokedex, pokedex,  } = useContext(GlobalStateContext)
+
+    const { states, requests, addPokedex  } = useContext(GlobalStateContext)
 
 
     useEffect(() => {
-        requests.getPokemons()
-        requests.getImages()
-        PokemonCard()
-
-    }, [pokedex])
+        requests.getPokemons();
+    }, [])
 
 
-
-    const PokemonCard = () => {
-        const mapPokemons = states.pokeImage && states.pokeImage.map((pokemon) => {
-           return <PokeCard  key={pokemon.name}>
-                    <p>{pokemon.name}</p>
-                    <img src={pokemon.img} />
-                    
-                    
+    const pokeMap = states.pokeImage.map((pokemon) => {
+        return (<PokeCard  key={pokemon.name}>
+                    <Image src={pokemon.img} />                        
                     <PokeCardButtonsContainer>
                         <Button variant="contained" color="secondary" onClick={() => addPokedex(pokemon)}>
                             Adicionar
@@ -41,22 +32,22 @@ export const Home = () => {
                             Ver Detalhes
                         </Button>
                 </PokeCardButtonsContainer>
-            </PokeCard>
-        })
-        return mapPokemons
-    }
+            </PokeCard>)
+    
+    })  
 
+    
 
     return(
         <GenericContainer> 
             <Header>
-               <h1>Home</h1> 
+               <h1>Lista de Pokemons</h1> 
                 <Button variant="contained" color="primary" onClick={() => navigate("/pokedex")}>
-                   Ver minha Pokedex
+                  Pokedex
                 </Button>
             </Header>
             <PokeCardsContainer> 
-                <PokemonCard />
+                {states.pokeImage.length > 0 ? pokeMap : <p>Loading...</p>}
             </PokeCardsContainer>
 
         </GenericContainer>
