@@ -37,7 +37,7 @@ export const Home = () => {
     })  
 
     
-
+    console.log(states.pokeImage)
     return(
         <GenericContainer> 
             <Header>
@@ -47,7 +47,7 @@ export const Home = () => {
                 </Button>
             </Header>
             <PokeCardsContainer> 
-                {states.pokeImage.length > 0 ? pokeMap : <p>Loading...</p>}
+                { states.pokeImage === [] ?  <p> Loading... </p> : pokeMap }
             </PokeCardsContainer>
 
         </GenericContainer>
