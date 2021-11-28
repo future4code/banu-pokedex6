@@ -10,6 +10,15 @@ export const PokeCard = styled.div`
     align-items: center;
     margin-bottom: 3%;
     padding-bottom: 2%;
+
+    @media(max-width: 600px) {
+        height: 80vh;
+        width: 40vw;
+    }
+
+    @media(max-width: 426px) {
+        width: 80vw;
+    }
 `
 
 export const PokeCardButtonsContainer = styled.div` 
@@ -18,8 +27,10 @@ export const PokeCardButtonsContainer = styled.div`
     justify-content: space-evenly;
     align-items: flex-end;
 
-    
-
+    @media(max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+    }
 `
 
 export const Header = styled.header `
@@ -41,6 +52,14 @@ export const PokeCardsContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin: 2%;
+
+    @media(max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media(max-width: 424px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 
 `
 
