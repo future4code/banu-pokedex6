@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import GlobalStateContext from "./GlobalStateContext";
 import { BASE_URL } from "../constants/urls";
 import axios from "axios";
@@ -9,27 +9,27 @@ const GlobalState = (props) => {
     const [pokemons, setPokemons] = useState([])
     const [pokedex, setPokedex] = useState([]) 
     const [pokemonDetails, setPokemonDetails] = useState([])
-    const [pokeImage, setPokeImage] = useState([])
+    const [pokeImage, setPokeImage] = useState([]) 
 
-  
- 
+
+
     const getPokemons = () => {
         axios.get(BASE_URL)
-        .then((response) => {setPokemons(response.data.results)})
+        .then((response) => {
+            setPokemons(response.data.results)
+
+            let pokeArray = []
+            pokemons.map((poke) => {
+                axios.get(poke.url)
+                .then((response) => {pokeArray = [...pokeArray, {name: poke.name,  img: response.data.sprites.front_default}]
+                setPokeImage(pokeArray)
+                })
+            })
+
+        })
         .catch((error) => console.log(error.message))
     }
 
-    const getImages = () => {
-        let pokeArray = []
-        pokemons.map((poke) => {
-            axios.get(poke.url)
-            .then((response) => {pokeArray = [...pokeArray, {name: poke.name,  img: response.data.sprites.front_default}]
-            setPokeImage(pokeArray)
-            })
-        })
-
-
-    }
 
     const getPokemonDetails = (name) => {
         axios.get(`${BASE_URL}/${name}`)
@@ -37,7 +37,7 @@ const GlobalState = (props) => {
             setPokemonDetails(response.data)
         })
         .catch((error) => console.log(error.message))
-    }
+    } 
 
 
     const addPokedex = (newPokemon) => {
@@ -73,9 +73,9 @@ const GlobalState = (props) => {
         setPokedex(removePoke)
     }
 
-    const states = { pokemons, pokemonDetails, pokeImage }
+    const states = { pokemons, pokemonDetails, pokeImage}
     const setters = { setPokemons, setPokemonDetails, setPokeImage }
-    const requests = { getPokemons,  getPokemonDetails, getImages }
+    const requests = { getPokemons,  getPokemonDetails  }
 
     return (
         <GlobalStateContext.Provider value={{ states, setters, requests, pokedex, addPokedex, removePokemonPokedex }} >

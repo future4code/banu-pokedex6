@@ -48,3 +48,26 @@ export const Image = styled.img`
     height: 80%;
     width: 80%;
 `
+
+export const ImageContainer = styled.div`
+    width: 15%;
+    height: 15%;
+    border: 1px solid black;
+    margin: 1%;
+`
+
+export const StatsContainer = styled.div`
+    border: 1px solid black;
+    max-width: 20vw;
+    padding: 2%;
+`
+export const TypeContainer = styled.div`
+    border: 1px solid black;
+    max-width: 20vw;
+    padding: 2%;
+`
+export const MovesContainer = styled.div`
+    border: 1px solid black;
+    max-width: 20vw;
+    padding: 2%;
+`

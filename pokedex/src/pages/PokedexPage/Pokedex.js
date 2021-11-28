@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router"
 import Button from '@material-ui/core/Button';
 import GlobalStateContext from "../../global/GlobalStateContext";
+import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, Image } from "./styled";
+
 
 const PokedexPage = () => {
     const { pokedex, removePokemonPokedex } = useContext(GlobalStateContext)
@@ -12,6 +14,7 @@ const PokedexPage = () => {
     },[])
 
     const navigate = useNavigate()
+    
 
     const pokemons = () => {
         if(pokedex === undefined) {
@@ -19,27 +22,34 @@ const PokedexPage = () => {
         } else {
             return <>{pokedex.map((poke, i) => {
                 return (
-                    <div key={i}> 
+                    <PokeCard key={i}> 
+                        <Image src={poke.img} />
                         <p >{poke.name}</p>
-                        <Button variant="contained" color="secondary" onClick={() => { removePokemonPokedex(poke) }}>
-                            Remover
-                        </Button>
-                        <Button variant="contained" color="secondary" >
-                            Ver Detalhes
-                        </Button>
-                    </div>
+
+                        <PokeCardButtonsContainer>
+                            <Button variant="contained" color="secondary" onClick={() => { removePokemonPokedex(poke) }}>
+                                Remover
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={() => navigate(`/details/${poke.name}`)}>
+                                Ver Detalhes
+                            </Button>
+                       </PokeCardButtonsContainer>
+                    </PokeCard>
                 )
             })}</>
         }
     }
     return(
-        <>
-            <Button variant="contained" color="primary" onClick={() => navigate("/")}>
-                Home
-            </Button>
-            <h1>Pokedex</h1>
+        <GenericContainer>
+            <Header>
+                <h1>Pokedex</h1>
+                <Button variant="contained" color="primary" onClick={() => navigate("/")}>
+                    Home
+                </Button>
+            </Header>
+            
             {pokemons()} 
-        </>
+        </GenericContainer>
     )
 }
 
