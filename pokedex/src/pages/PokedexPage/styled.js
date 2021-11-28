@@ -10,6 +10,7 @@ export const PokeCard = styled.div`
     align-items: center;
     margin-bottom: 3%;
     padding-bottom: 2%;
+    text-transform: capitalize;
 `
 
 export const PokeCardButtonsContainer = styled.div` 

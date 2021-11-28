@@ -36,8 +36,7 @@ export const Home = () => {
     
     })  
 
-    
-    console.log(states.pokeImage)
+
     return(
         <GenericContainer> 
             <Header>

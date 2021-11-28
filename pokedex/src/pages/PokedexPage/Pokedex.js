@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router"
 import Button from '@material-ui/core/Button';
 import GlobalStateContext from "../../global/GlobalStateContext";
-import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, Image } from "./styled";
+import { PokeCard, PokeCardButtonsContainer, Header, GenericContainer, Image, PokeCardsContainer } from "./styled";
 
 
 const PokedexPage = () => {
@@ -24,7 +24,7 @@ const PokedexPage = () => {
                 return (
                     <PokeCard key={i}> 
                         <Image src={poke.img} />
-                        <p >{poke.name}</p>
+                        <h2>{poke.name}</h2>
 
                         <PokeCardButtonsContainer>
                             <Button variant="contained" color="secondary" onClick={() => { removePokemonPokedex(poke) }}>
@@ -47,8 +47,9 @@ const PokedexPage = () => {
                     Home
                 </Button>
             </Header>
-            
-            {pokemons()} 
+            <PokeCardsContainer>
+                {pokemons()} 
+            </PokeCardsContainer>
         </GenericContainer>
     )
 }
