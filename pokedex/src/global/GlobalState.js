@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import GlobalStateContext from "./GlobalStateContext";
 import { BASE_URL } from "../constants/urls";
 import axios from "axios";
@@ -16,16 +16,14 @@ const GlobalState = (props) => {
     const getPokemons = () => {
         axios.get(BASE_URL)
         .then((response) => {
-            setPokemons(response.data.results)
-
+            
             let pokeArray = []
-            pokemons.map((poke) => {
-                axios.get(poke.url)
-                .then((response) => {pokeArray = [...pokeArray, {name: poke.name,  img: response.data.sprites.front_default}]
-                setPokeImage(pokeArray)
-                })
+            response.data.results.map(async (poke) => {
+                const response = await axios.get(poke.url);
+                pokeArray = [...pokeArray, { name: poke.name, img: response.data.sprites.front_default }];
+                setPokeImage(pokeArray);
             })
-
+            setPokemons(response.data.results)
         })
         .catch((error) => console.log(error.message))
     }
