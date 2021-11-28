@@ -1,9 +1,9 @@
 # POKEDEX
 
 Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+- Alan Marcos Brazões Sena
+- Patrícia Rangel Gonçalves do Sacramento
+- Wellynton Alves Benicio
 
 Link do Surge: foolish-army.surge.sh
 
