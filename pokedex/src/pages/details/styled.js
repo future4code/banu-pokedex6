@@ -30,10 +30,18 @@ export const Header = styled.header `
     margin: 0;
     background-color: black;
     color: white;
+    text-transform: capitalize;
 `
 
 export const GenericContainer = styled.div` 
     max-width: 100vw;
+
+`
+export const DetailsContainer = styled.div` 
+    max-width: 100vw;
+    display: flex;
+    margin: 1%;
+    justify-content: space-evenly;
 
 `
 
@@ -58,16 +66,22 @@ export const ImageContainer = styled.div`
 
 export const StatsContainer = styled.div`
     border: 1px solid black;
-    max-width: 20vw;
+    width: 20%;
     padding: 2%;
+    text-transform: capitalize;
+    margin: 1%;
 `
 export const TypeContainer = styled.div`
     border: 1px solid black;
-    max-width: 20vw;
+    width: 20%;
     padding: 2%;
+    text-transform: capitalize;
+    margin: 1%;
 `
 export const MovesContainer = styled.div`
     border: 1px solid black;
-    max-width: 20vw;
+    width: 20%;
     padding: 2%;
+    text-transform: capitalize;
+    margin: 1%;
 `
